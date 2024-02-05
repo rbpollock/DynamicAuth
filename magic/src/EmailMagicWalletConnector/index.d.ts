@@ -1,0 +1,1 @@
+export { EmailMagicWalletConnector } from './EmailMagicWalletConnector';

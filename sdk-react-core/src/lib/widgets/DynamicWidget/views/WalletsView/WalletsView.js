@@ -1,0 +1,80 @@
+import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
+import 'react';
+import '@dynamic-labs/utils';
+import { useInternalDynamicContext } from '../../../../context/DynamicContext/useInternalDynamicContext.js';
+import '@dynamic-labs/wallet-connector-core';
+import '../../../../context/CaptchaContext/CaptchaContext.js';
+import '../../../../context/ErrorContext/ErrorContext.js';
+import { useViewContext } from '../../../../context/ViewContext/ViewContext.js';
+import '@dynamic-labs/sdk-api';
+import '../../../../shared/logger.js';
+import '@dynamic-labs/iconic';
+import { ReactComponent as SvgAdd } from '../../../../shared/assets/add.js';
+import '@dynamic-labs/wallet-book';
+import '../../../../utils/constants/colors.js';
+import '../../../../shared/utils/classes/storage/localStorage.js';
+import 'viem';
+import '../../../../shared/consts/index.js';
+import '@dynamic-labs/multi-wallet';
+import '../../../../context/AccessDeniedContext/AccessDeniedContext.js';
+import '../../../../context/AccountExistsContext/AccountExistsContext.js';
+import '../../../../config/ApiEndpoint.js';
+import '../../../../context/EmailVerificationContext/EmailVerificationContext.js';
+import 'react-dom';
+import '../../../../context/ThemeContext/ThemeContext.js';
+import { useKYCFlag } from '../../../../utils/hooks/useKYCFlag/useKYCFlag.js';
+import '@dynamic-labs/types';
+import 'yup';
+import 'react-i18next';
+import '../../../../context/MockContext/MockContext.js';
+import '../../../../utils/hooks/useUserUpdateRequest/useUpdateUser/useUpdateUser.js';
+import '../../../../context/UserFieldEditorContext/UserFieldEditorContext.js';
+import '@dynamic-labs/rpc-providers';
+import '../../../../context/UserWalletsContext/UserWalletsContext.js';
+import '../../../../components/Transition/ZoomTransition/ZoomTransition.js';
+import '../../../../components/Transition/SlideInUpTransition/SlideInUpTransition.js';
+import '../../../../components/Transition/OpacityTransition/OpacityTransition.js';
+import '../../../../components/ShadowDOM/ShadowDOM.js';
+import '../../../../components/OverlayCard/OverlayCard.context.js';
+import '../../../../context/FooterAnimationContext/index.js';
+import '../../../../context/QrCodeContext/QrCodeContext.js';
+import { Typography } from '../../../../components/Typography/Typography.js';
+import { DynamicWidgetFooter } from '../../components/DynamicWidgetFooter/DynamicWidgetFooter.js';
+import '../../../../context/WalletGroupContext/WalletGroupContext.js';
+import '../../components/DynamicWidgetHeader/DynamicWidgetHeader.js';
+import 'qrcode';
+import '../../../../context/LoadingContext/LoadingContext.js';
+import 'i18next';
+import '../../context/DynamicWidgetContext.js';
+import { DynamicWidgetWallets } from '../../components/DynamicWidgetWallets/DynamicWidgetWallets.js';
+import { SingleWalletButtons } from '../../components/SingleWalletButtons/SingleWalletButtons.js';
+import '../../../../components/UserProfile/parts/UserProfileField/components/VerifiedEmailIcon/VerifiedEmailIcon.js';
+import 'formik';
+import { Button } from '../../../../components/Button/Button.js';
+import '../../../../components/IconButton/IconButton.js';
+import '../../../../components/Alert/Alert.js';
+import '@dynamic-labs/viem-utils';
+import '../ManagePasskeysWidgetView/PasskeyCard/PasskeyCard.js';
+import '../../../../components/InlineWidget/InlineWidget.js';
+import { LogoutButton } from '../../../../components/LogoutButton/LogoutButton.js';
+import '../../../../components/MenuList/Dropdown/Dropdown.js';
+import '../../../../components/Popper/Popper/Popper.js';
+import '../../../../components/Popper/PopperContext/PopperContext.js';
+import 'react-focus-lock';
+
+const WalletsView = () => {
+    const { setShowAuthFlow, setSelectedWalletConnectorKey, user, authMode, multiWallet, } = useInternalDynamicContext();
+    const isKYCEnabled = useKYCFlag();
+    const { setView } = useViewContext();
+    const addNewWallet = () => {
+        setView('multi-wallet-wallet-list');
+        setShowAuthFlow(true);
+        setSelectedWalletConnectorKey(null);
+    };
+    return (jsxs(Fragment, { children: [!multiWallet && !isKYCEnabled && (jsxs("div", { className: 'dynamic-widget-index-view__email-container', children: [jsx(Typography, { children: user === null || user === void 0 ? void 0 : user.email }), jsx(SingleWalletButtons, {})] })), multiWallet && (jsxs(Fragment, { children: [jsx(DynamicWidgetWallets, {}), jsx(DynamicWidgetFooter, { children: jsxs("div", { className: 'dynamic-widget-index-view__footer', children: [jsxs(Button, { buttonClassName: 'dynamic-widget-footer__button', buttonVariant: 'tertiary', buttonPadding: 'none', onClick: addNewWallet, typographyProps: {
+                                        color: 'secondary',
+                                        variant: 'button_tertiary',
+                                    }, startSlot: jsx(SvgAdd, {}), children: [authMode === 'connect-only' ? 'Connect' : 'Link', " a new wallet"] }), jsx(LogoutButton, { isTextButton: true, buttonClassName: 'dynamic-widget-footer__button' })] }) })] }))] }));
+};
+
+export { WalletsView };

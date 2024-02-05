@@ -1,0 +1,77 @@
+import { __rest } from '../../../../../_virtual/_tslib.js';
+import { jsx } from 'react/jsx-runtime';
+import { useRef, useMemo } from 'react';
+import '@dynamic-labs/utils';
+import '../../../context/DynamicContext/DynamicContext.js';
+import '@dynamic-labs/wallet-connector-core';
+import '../../../context/CaptchaContext/CaptchaContext.js';
+import '../../../context/ErrorContext/ErrorContext.js';
+import '../../../context/ViewContext/ViewContext.js';
+import '@dynamic-labs/sdk-api';
+import '../../../shared/logger.js';
+import '@dynamic-labs/iconic';
+import '@dynamic-labs/wallet-book';
+import '../../../utils/constants/colors.js';
+import '../../../shared/utils/classes/storage/localStorage.js';
+import 'viem';
+import '../../../shared/consts/index.js';
+import '@dynamic-labs/multi-wallet';
+import '../../../context/AccessDeniedContext/AccessDeniedContext.js';
+import '../../../context/AccountExistsContext/AccountExistsContext.js';
+import '../../../config/ApiEndpoint.js';
+import '../../../context/EmailVerificationContext/EmailVerificationContext.js';
+import 'react-dom';
+import '../../../context/ThemeContext/ThemeContext.js';
+import { useResizeObserver } from '../../../utils/hooks/useResizeObserver/useResizeObserver.js';
+import '@dynamic-labs/types';
+import { useTransition } from '../../../utils/hooks/useTransition/useTransition.js';
+import 'yup';
+import 'react-i18next';
+import '../../../context/MockContext/MockContext.js';
+import '../../../utils/hooks/useUserUpdateRequest/useUpdateUser/useUpdateUser.js';
+import '../../../context/UserFieldEditorContext/UserFieldEditorContext.js';
+import '@dynamic-labs/rpc-providers';
+import '../../../context/UserWalletsContext/UserWalletsContext.js';
+import { classNames } from '../../../utils/functions/classNames/classNames.js';
+import '../../Alert/Alert.js';
+import '../../ShadowDOM/ShadowDOM.js';
+import '../../IconButton/IconButton.js';
+import '../../InlineWidget/InlineWidget.js';
+import '../../MenuList/Dropdown/Dropdown.js';
+import '../ZoomTransition/ZoomTransition.js';
+import '../SlideInUpTransition/SlideInUpTransition.js';
+import '../OpacityTransition/OpacityTransition.js';
+import '../../Popper/Popper/Popper.js';
+import '../../Popper/PopperContext/PopperContext.js';
+import 'react-focus-lock';
+import 'formik';
+import 'i18next';
+import '../../OverlayCard/OverlayCard.context.js';
+import '../../../context/FooterAnimationContext/index.js';
+import '../../../context/QrCodeContext/QrCodeContext.js';
+import '../../../context/WalletGroupContext/WalletGroupContext.js';
+import '../../../widgets/DynamicWidget/components/DynamicWidgetHeader/DynamicWidgetHeader.js';
+import 'qrcode';
+import '../../../context/LoadingContext/LoadingContext.js';
+import '../../../widgets/DynamicWidget/context/DynamicWidgetContext.js';
+import '../../UserProfile/parts/UserProfileField/components/VerifiedEmailIcon/VerifiedEmailIcon.js';
+import '@dynamic-labs/viem-utils';
+import '../../../widgets/DynamicWidget/views/ManagePasskeysWidgetView/PasskeyCard/PasskeyCard.js';
+
+const VerticalDrawerTransition = (_a) => {
+    var { style, children, className } = _a, props = __rest(_a, ["style", "children", "className"]);
+    const containerRef = useRef(null);
+    const childRef = useRef(null);
+    const [childEntry] = useResizeObserver(childRef);
+    const containerChildHeight = useMemo(() => childEntry === null || childEntry === void 0 ? void 0 : childEntry.height, [childEntry]);
+    const { mount, stage, currentDuration } = useTransition(Object.assign({ animateOnMount: false }, props));
+    const maxHeight = useMemo(() => {
+        if (!mount || stage === 'EXITING' || stage === 'UNMOUNT') {
+            return 0;
+        }
+        return containerChildHeight;
+    }, [stage, containerChildHeight, mount]);
+    return (jsx("div", { ref: containerRef, className: classNames(className, 'vertical-drawer-animation'), style: Object.assign(Object.assign({}, style), { maxHeight, transitionDuration: `${currentDuration}ms` }), children: jsx("div", { ref: childRef, children: mount && children }) }));
+};
+
+export { VerticalDrawerTransition };
